@@ -1,0 +1,42 @@
+﻿@model List<CartItem>
+
+<h2>Історія замовлень</h2>
+
+@if (!Model.Any())
+{
+    <p>Замовлення не знайдено</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Користувач</th>
+                <th>Марка</th>
+                <th>Модель</th>
+                <th>Дата початку</th>
+                <th>Дата закінчення</th>
+                <th>Щоденна ставка</th>
+                <th>Знижка в %</th>
+                <th>Штраф</th>
+                <th>Загальна ціна грн</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserId</td>
+                    <td>@item.Car.Make</td>
+                    <td>@item.Car.Model</td>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.EndDate.ToShortDateString()</td>
+                    <td>@item.DailyRate</td>
+                    <td>@item.Discount%</td>
+                    <td>@item.Penalty</td>
+                    <td>@item.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

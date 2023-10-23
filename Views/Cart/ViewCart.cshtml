@@ -1,0 +1,50 @@
+﻿@model List<CartItem>
+
+<h2>Корзина</h2>
+
+@if (!Model.Any())
+{
+    <p>Ваш кошик порожній</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Авто</th>
+                <th>Дата початку</th>
+                <th>Дата закінчення</th>
+                <th>Щоденна ставка</th>
+                <th>Знижка</th>
+                <th>Штраф</th>
+                <th>Загальна ціна</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CarId</td>
+                    <td>
+                        <input type="date" name="startDate" value="@item.StartDate.ToString("yyyy-MM-dd")" />
+                    </td>
+                    <td>
+                        <input type="date" name="endDate" value="@item.EndDate.ToString("yyyy-MM-dd")" />
+                    </td>
+                    <td>@item.DailyRate</td>
+                    <td>@item.Discount</td>
+                    <td>@item.Penalty</td>
+                    <td>@item.TotalPrice</td>
+                    <td>
+                        <a href="@Url.Action("RemoveFromCart", "Cart", new { id = item.Id })">Видалити</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form method="post" action="@Url.Action("UpdateCart", "Cart")">
+        <button type="submit">Підтвердити покупку</button>
+    </form>
+}

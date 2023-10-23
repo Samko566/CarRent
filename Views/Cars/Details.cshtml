@@ -1,0 +1,72 @@
+﻿@model CarRent.Models.Car
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Деталі</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DailyRate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DailyRate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Available)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Available)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhotoPath)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Url.Content("~/images/cars/" + Model.PhotoPath)" alt="Car Image" />
+        </dd>
+    </dl>
+</div>
+<div>
+    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+        <div class="form-group">
+            <label for="startDate">Дата початку аренди:</label>
+            <input type="date" class="form-control" id="startDate" name="startDate">
+        </div>
+        <div class="form-group">
+            <label for="endDate">Дата закінчення аренди:</label>
+            <input type="date" class="form-control" id="endDate" name="endDate">
+        </div>
+        <input type="hidden" name="carId" value="@Model.Id" />
+        <button type="submit" class="btn btn-primary">Додати до кошика</button>
+    </form>
+</div>
+<div>
+    <a asp-action="Index">Назад до списку</a>
+</div>
